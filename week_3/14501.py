@@ -22,7 +22,7 @@ answer = 0
 def search(today,cur_pay):
   global answer
    
-  if today >= MAXDAY:
+  if today-1 >= MAXDAY:
       answer = max(answer,cur_pay)
       return
 
@@ -37,6 +37,10 @@ def search(today,cur_pay):
 
       working[day:day+timetable[day]] = [False]*timetable[day]
       cur_pay -= paytable[day]
+  
+  answer = max(answer,cur_pay)
+  
+
 
 # main
 working = [False] * MAXDAY
