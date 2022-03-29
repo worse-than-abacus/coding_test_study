@@ -80,13 +80,7 @@ def dfs(x,y):
       dfs(x,y+1)
     else:
       return
-    
-     
 
-        
-          
-            
-      
 for x in range(n):
     for y in range(n):
       dfs(x,y)
