@@ -45,5 +45,4 @@ def search():
     search()
     selected.pop()
 
-
 search()
