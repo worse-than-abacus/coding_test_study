@@ -18,7 +18,9 @@ def search():
     search()
     selected.pop()
 
+# shadow
 search()
+
 N, M = map(int,input().split())
 s=[]
 num_list=sorted(list(map(int,input().split())))
@@ -33,3 +35,4 @@ def dfs():
         s.pop()
 
 dfs()
+
