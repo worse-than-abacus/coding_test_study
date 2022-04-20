@@ -77,4 +77,3 @@ def score():
 recur(0)
 
 print(min_value)
-

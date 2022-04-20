@@ -19,6 +19,7 @@ def search(start):
     selected.pop()
 
 search(0)
+
 # 
 N,M = map(int,input().split())
 s=[]
@@ -33,3 +34,4 @@ def dfs(start):
         dfs(i+1)
         s.pop()
 dfs(0)
+
