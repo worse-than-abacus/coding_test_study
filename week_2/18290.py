@@ -82,6 +82,7 @@ def go(px, py, index, sum):
 
 go(0, 0, 0, 0)
 
+# week 8, re-solved
 print(answer)
 
 ###try1 실패
@@ -155,3 +156,6 @@ for i in range(N):
         visited[i][j] = False
 
 print(max_num)
+
+print(answer)
+

@@ -18,6 +18,9 @@ def search():
     search()
     selected.pop()
 
+
+search()
+
 # shadow
 search()
 
