@@ -34,4 +34,3 @@ def dfs(start):
         dfs(i+1)
         s.pop()
 dfs(0)
-
