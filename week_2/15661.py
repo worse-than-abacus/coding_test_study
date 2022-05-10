@@ -1,68 +1,80 @@
-## try1 time-out
-from itertools import combinations
-
+# trt 1-> pypy3 성공
+import sys
+from itertools import combinations, product
+input = sys.stdin.readline
 
 n = int(input())
-power = [list(map(int, input().split())) for _ in range(n)]
-members = list(range(n))
-gap =10000
 
-team_list = []
-for i in range(1,n):
-  team_list.extend(list(combinations(members,i)))
+table = [list(map(int,input().split())) for _ in range(n)]
 
-gap = 10000
-for i in range(len(team_list)//2):
-  team_a = team_list[i]
-  team_b = team_list[-i-1]
-  a_power = 0
-  b_power = 0
-  
-  for j in range(len(team_a)):
-    member = team_a[j]
-    for other_member in team_a:
-      a_power += power[member][other_member]
-      
-  for j in range(len(team_b)):
-    member = team_b[j]
-    for other_member in team_b:
-      b_power += power[member][other_member]
+total_member = set([member for member in range(n)])
 
-  gap = min(gap, abs(a_power - b_power))
+teamA = []
+answer = 100000
+for i in range(n//2+1):
+  for teamA in combinations(total_member,i):
+    teamB = set(total_member) - set(teamA)
 
-print(gap)
+    teamA_stat,teamB_stat = 0,0
+    for playerA,playerB in product(teamA,repeat=2):
+      teamA_stat += table[playerA][playerB]
+    
+    for playerA,playerB in product(teamB,repeat=2):
+      teamB_stat += table[playerA][playerB]
 
-## try2 time-out
+    answer = min(answer, int(abs(teamA_stat-teamB_stat)))
 
-from itertools import combinations ,permutations
+print(answer)
+
+
+# 모범 코드... 하지만 시간초과 , 재귀
 import sys
 
-n = int(sys.stdin.readline())
-power = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-members = list(range(n))
+input = sys.stdin.readline
+
+n = int(input())
+
+matrix = [list(map(int,input().split())) for _ in range(n)]
+
+visited1 = [False] * n
+
+min_value = 100*20
+
+def recur(target):
+
+    if target == n:
+        score()
+        return
 
 
-gap = 10000
+    visited1[target] = True
+    recur(target+1)
+    visited1[target] = False
+    recur(target+1)
+            
+    
 
-team_list = []
-for i in range(1,n):
-  team_list.extend(list(combinations(members,i)))
+def score():
+    global min_value
 
-gap=10000
-for i in range(len(team_list)//2):
-  team_a = team_list[i]
-  team_b = team_list[-i-1]
-  team_a_index = list(permutations(team_a,2))
-  team_b_index = list(permutations(team_b,2))
-  a_power = 0
-  b_power = 0
+    start = 0
+    link = 0
 
-  for j,k in team_a_index:
-    a_power += power[j][k]
+    for i in range(n-1):
+        for j in range(i+1,n):
+            if visited1[i] and visited1[j] :
+                start += matrix[i][j] + matrix[j][i]
+            elif not visited1[i] and not visited1[j]:
+                link += matrix[i][j] + matrix[j][i]
+    
+    diff = abs(start-link)
 
-  for j,k in team_b_index:
-    b_power += power[j][k]
+    if  min_value > diff:
+        min_value = diff
 
-  gap = min(gap,abs(a_power - b_power))
 
-print(gap)
+
+recur(0)
+
+
+print(min_value)
