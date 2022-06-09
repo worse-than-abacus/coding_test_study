@@ -83,3 +83,6 @@ else :
     print(MIN)
 
 # fail....
+# two point 개념에서 다시 풀어보자
+# https://dev-dain.tistory.com/152 answer sheet
+
